@@ -1,9 +1,13 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
-const userController = require('../controller/user.controller');
 
+const { register, login, getProfile, logout } = require('../controller/user.controller');
 
-router.post('/register', userController.register);
+const { auth } = require('../middleware/authMiddlware.js'); // FIXED
+
+router.post('/register', register);
+router.post('/login', login);
+router.get('/profile', auth, getProfile);
+router.post('/logout', logout);
 
 module.exports = router;
