@@ -16,7 +16,7 @@ module.exports.register  = async (req, res) => {
 
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       res.cookie('token', token);
-      res.send({ message: 'User registered Successfully'})
+      res.send({token, newUser})
     }catch(error){
         res.status(500).json({ message: error.message});
     }
